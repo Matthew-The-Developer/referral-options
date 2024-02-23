@@ -1,0 +1,39 @@
+<div>
+  <h4>Referral Form Option 1</h4>
+  <small>Based exactly on the specifications in the requirements</small>
+</div>
+
+<form [formGroup]="group">
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Where did this referral come from?</mat-label>
+    <mat-select formControlName="referral">
+      @for (option of referralOptions; track option) {
+      <mat-option [value]="option">
+        @if(isDCINephrologist(option.value)) {
+        <span>{{ option.value.name }}</span>
+        } @else {
+        <span>{{ option.value }}</span>
+        }
+      </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if(this.group.controls.unknownSource.enabled) {
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Did the referral come from outside of DIC?</mat-label>
+    <mat-select formControlName="unknownSource">
+      @for (option of unknownOptions; track option) {
+      <mat-option [value]="option">
+        <span>{{ option.description }}</span>
+      </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  } @if(this.group.controls.unknownComment.enabled) {
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>What does the patient know about their referral?</mat-label>
+    <textarea formControlName="unknownComment" matInput></textarea>
+  </mat-form-field>
+  }
+</form>
