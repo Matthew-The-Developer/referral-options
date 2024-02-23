@@ -21,7 +21,7 @@
 
   @if(this.group.controls.unknownSource.enabled) {
   <mat-form-field appearance="outline" subscriptSizing="dynamic">
-    <mat-label>Did the referral come from outside of DIC?</mat-label>
+    <mat-label>Did the referral come from outside of DCI?</mat-label>
     <mat-select formControlName="unknownSource">
       @for (option of unknownOptions; track option) {
       <mat-option [value]="option">
@@ -32,7 +32,7 @@
   </mat-form-field>
   } @if(this.group.controls.unknownComment.enabled) {
   <mat-form-field appearance="outline" subscriptSizing="dynamic">
-    <mat-label>{{ unknownCommentLabel() }}</mat-label>
+    <mat-label>Comments</mat-label>
     <textarea formControlName="unknownComment" matInput></textarea>
   </mat-form-field>
   }

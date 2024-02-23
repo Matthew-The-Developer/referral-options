@@ -32,14 +32,6 @@ export class OptionTwoComponent implements OnInit {
 
   referralValue = signal<Referral | null>(null);
 
-  unknownCommentLabel = computed(() => {
-    if (this.referralValue()?.source === ReferralSource.NonDCINephrologist) {
-      return "Does the patient know the nephrologist's name?";
-    } else {
-      return 'Does the patient know more about the their referral?';
-    }
-  });
-
   referralisUnknown = effect(() => {
     if (this.referralValue()?.source === ReferralSource.UnknownSource) {
       this.group.controls.unknownComment.reset();
