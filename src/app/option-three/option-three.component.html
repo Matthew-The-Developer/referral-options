@@ -5,7 +5,7 @@
 
 <form [formGroup]="group">
   <mat-form-field appearance="outline" subscriptSizing="dynamic">
-    <mat-label>Where did this referral come from?</mat-label>
+    <mat-label>What nephrologist referred patient to recieve dialysis in DCI?</mat-label>
     <mat-select formControlName="referral">
       @for (referralGroup of referralGroups; track referralGroup) {
       <mat-optgroup [label]="referralGroup.label">
