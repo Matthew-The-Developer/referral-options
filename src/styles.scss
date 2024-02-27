@@ -2,3 +2,12 @@
 
 html, body { height: 100%; overflow: hidden; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+mat-optgroup.sticky {
+  .mat-mdc-optgroup-label {
+    position: sticky;
+    z-index: 1;
+    top: -0.5rem;
+    background-color: white;
+  }
+}

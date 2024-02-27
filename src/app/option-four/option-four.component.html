@@ -8,7 +8,7 @@
     <mat-label>What nephrologist referred patient to recieve dialysis in DCI?</mat-label>
     <mat-select formControlName="referral">
       @for (referralGroup of referralGroups; track referralGroup) {
-      <mat-optgroup [label]="referralGroup.label">
+      <mat-optgroup [label]="referralGroup.label" class="sticky">
         @for (referral of referralGroup.referrals; track referral) {
         <mat-option [value]="referral">
           @if(isDCINephrologist(referral.value)) {
