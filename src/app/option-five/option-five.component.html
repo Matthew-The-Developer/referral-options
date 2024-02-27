@@ -1,0 +1,32 @@
+<div>
+  <h4>Referral Form Option 4</h4>
+  <small>Option 3 revised but with a more realistic list of nephrologists but moving the non-DCI options to the bottom of the list (no search implemented)</small>
+</div>
+
+<form [formGroup]="group">
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>What nephrologist referred patient to recieve dialysis in DCI?</mat-label>
+    <mat-select formControlName="referral">
+      @for (referralGroup of referralGroups; track referralGroup) {
+      <mat-optgroup [label]="referralGroup.label">
+        @for (referral of referralGroup.referrals; track referral) {
+        <mat-option [value]="referral">
+          @if(isDCINephrologist(referral.value)) {
+          <span>{{ referral.value.name }}</span>
+          } @else {
+          <span>{{ referral.value }}</span>
+          }
+        </mat-option>
+        }
+      </mat-optgroup>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if(this.group.controls.unknownComment.enabled) {
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Comments</mat-label>
+    <textarea formControlName="unknownComment" matInput></textarea>
+  </mat-form-field>
+  }
+</form>
