@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { DCINephrologist, Referral, ReferralGroup, ReferralSource, isDCINephrologist } from '../models/referral.model';
+import { Referral, ReferralGroup, ReferralSource, isDCINephrologist } from '../models/referral.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { adjectives, names, uniqueNamesGenerator } from 'unique-names-generator';
 
@@ -48,7 +48,7 @@ export class OptionFourComponent {
 
   referralGroups: ReferralGroup[] = [
     {
-      label: 'Non-DCI Nephrologist',
+      label: 'Non-DCI Nephrologist / Other',
       referrals: [
         {
           source: ReferralSource.Hospital,

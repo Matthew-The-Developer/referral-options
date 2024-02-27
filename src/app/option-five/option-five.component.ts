@@ -87,7 +87,7 @@ export class OptionFiveComponent {
     });
 
     this.referralGroups.push({
-      label: 'Non-DCI Nephrologist',
+      label: 'Non-DCI Nephrologist / Other',
       referrals: [
         {
           source: ReferralSource.Hospital,
