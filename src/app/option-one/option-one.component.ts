@@ -3,7 +3,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
-import { DCINephrologist, Referral, ReferralSource, UnknownReferral, UnknownSource } from '../models/referral.model';
+import { DCINephrologist, Referral, ReferralSource, UnknownReferral, UnknownSource, isDCINephrologist } from '../models/referral.model';
 
 import { Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -95,13 +95,11 @@ export class OptionOneComponent {
     },
   ];
 
+  isDCINephrologist = isDCINephrologist;
+
   ngOnInit(): void {
     this.group.controls.referral.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => this.referralValue.set(value));
-  }
-
-  isDCINephrologist(value: string | DCINephrologist): value is DCINephrologist {
-    return typeof value === 'object' && 'name' in value && 'location' in value;
   }
 }

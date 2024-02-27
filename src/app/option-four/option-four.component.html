@@ -1,6 +1,6 @@
 <div>
   <h4>Referral Form Option 3 Revised</h4>
-  <small>Option 3 but with a more realistic list of nephrologists (no search currently implemented)</small>
+  <small>Option 3 but with a more realistic list of alphabetized nephrologists (no search currently implemented)</small>
 </div>
 
 <form [formGroup]="group">
@@ -12,7 +12,7 @@
         @for (referral of referralGroup.referrals; track referral) {
         <mat-option [value]="referral">
           @if(isDCINephrologist(referral.value)) {
-          <span>{{ referral.value.name }}</span>
+          <span>DR. {{ referral.value.name }}</span>
           } @else {
           <span>{{ referral.value }}</span>
           }

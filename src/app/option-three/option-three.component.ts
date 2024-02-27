@@ -4,7 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 import { Component, DestroyRef, OnInit, effect, inject, signal } from '@angular/core';
-import { DCINephrologist, Referral, ReferralGroup, ReferralSource } from '../models/referral.model';
+import { DCINephrologist, Referral, ReferralGroup, ReferralSource, isDCINephrologist } from '../models/referral.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -95,13 +95,11 @@ export class OptionThreeComponent implements OnInit {
     },
   ];
 
+  isDCINephrologist = isDCINephrologist;
+
   ngOnInit(): void {
     this.group.controls.referral.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => this.referralValue.set(value));
-  }
-
-  isDCINephrologist(value: string | DCINephrologist): value is DCINephrologist {
-    return typeof value === 'object' && 'name' in value && 'location' in value;
   }
 }

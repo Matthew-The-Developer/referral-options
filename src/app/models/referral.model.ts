@@ -33,3 +33,7 @@ export interface ReferralGroup {
   label: string;
   referrals: Referral[];
 }
+
+export function isDCINephrologist(value: string | DCINephrologist): value is DCINephrologist {
+  return typeof value === 'object' && 'name' in value && 'location' in value;
+}

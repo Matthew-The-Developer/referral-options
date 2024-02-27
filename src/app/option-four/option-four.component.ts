@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { DCINephrologist, Referral, ReferralGroup, ReferralSource } from '../models/referral.model';
+import { DCINephrologist, Referral, ReferralGroup, ReferralSource, isDCINephrologist } from '../models/referral.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { adjectives, names, uniqueNamesGenerator } from 'unique-names-generator';
 
@@ -70,11 +70,13 @@ export class OptionFourComponent {
     },
   ];
 
+  isDCINephrologist = isDCINephrologist;
+
   ngOnInit(): void {
     const referrals: Referral[] = [];
 
     for(let i = 0; i < 100; i++) {
-      const name = `Dr. ${uniqueNamesGenerator({ dictionaries: [names], style: 'capital' })}`;
+      const name = uniqueNamesGenerator({ dictionaries: [names], style: 'capital' });
       const location = `${Math.floor(Math.random()*90000) + 10000} - ${uniqueNamesGenerator({ dictionaries: [adjectives], style: 'capital' })} ${uniqueNamesGenerator({ dictionaries: [adjectives], style: 'capital' })}`;
       
       referrals.push({
@@ -88,15 +90,25 @@ export class OptionFourComponent {
 
     this.referralGroups.push({
       label: 'DCI-Affiliated Nephrologists',
-      referrals
+      referrals: referrals.sort((a, b) => {
+        if (isDCINephrologist(a.value)) {
+          if (isDCINephrologist(b.value)) {
+            return a.value.name.localeCompare(b.value.name);
+          } else {
+            return a.value.name.localeCompare(b.value);
+          }
+        } else {
+          if (isDCINephrologist(b.value)) {
+            return a.value.localeCompare(b.value.name); 
+          } else {
+            return a.value.localeCompare(b.value);
+          }
+        }
+      })
     })
 
     this.group.controls.referral.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((value) => this.referralValue.set(value));
-  }
-
-  isDCINephrologist(value: string | DCINephrologist): value is DCINephrologist {
-    return typeof value === 'object' && 'name' in value && 'location' in value;
   }
 }
