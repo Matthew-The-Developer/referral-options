@@ -33,8 +33,7 @@
       </mat-optgroup>
       
       <mat-optgroup label="DCI-Affiliated Nephrologists" class="sticky">
-        @if (filteredReferrals().length > 0) {
-          @for (referral of filteredReferrals(); track referral) {
+        @for (referral of filteredReferrals(); track referral) {
           <mat-option [value]="referral">
             @if(isDCINephrologist(referral.value)) {
             <span>DR. {{ referral.value.name }}</span>
@@ -42,8 +41,9 @@
             <span>{{ referral.value }}</span>
             }
           </mat-option>
-          }
-        } @else {
+        }
+
+        @if (filteredReferrals().length < 1) {
           <p class="not-found">No nephrologists found matching search</p>
         }
       </mat-optgroup>
