@@ -5,6 +5,7 @@ import { OptionTwoComponent } from './option-two/option-two.component';
 import { OptionThreeComponent } from './option-three/option-three.component';
 import { OptionFourComponent } from './option-four/option-four.component';
 import { OptionFiveComponent } from './option-five/option-five.component';
+import { OptionSixComponent } from './option-six/option-six.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { OptionFiveComponent } from './option-five/option-five.component';
     OptionThreeComponent,
     OptionFourComponent,
     OptionFiveComponent,
+    OptionSixComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

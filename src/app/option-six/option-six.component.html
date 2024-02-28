@@ -1,1 +1,59 @@
-<p>option-six works!</p>
+<div>
+  <h4>Referral Form Option 5</h4>
+  <small>Option 3 With realistic list of alphabetized nephrologists but with search</small>
+</div>
+
+<form [formGroup]="group">
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>What nephrologist referred patient to recieve dialysis in DCI?</mat-label>
+    <input 
+      #input
+      type="text"
+      placeholder="Search DCI Nephrologists"
+      aria-label="Number"
+      matInput
+      formControlName="referral"
+      onfocus="this.select()"
+      [matAutocomplete]="auto"
+      (input)="filter(input)"
+      (focus)="filter(input)"
+    >
+
+    <mat-autocomplete requireSelection [displayWith]="displayReferral" #auto="matAutocomplete">
+      <mat-optgroup [label]="nonDciNephrologistsGroup.label" class="sticky">
+        @for (referral of nonDciNephrologistsGroup.referrals; track referral) {
+        <mat-option [value]="referral">
+          @if(isDCINephrologist(referral.value)) {
+          <span>DR. {{ referral.value.name }}</span>
+          } @else {
+          <span>{{ referral.value }}</span>
+          }
+        </mat-option>
+        }
+      </mat-optgroup>
+      
+      <mat-optgroup label="DCI-Affiliated Nephrologists" class="sticky">
+        @if (filteredReferrals().length > 0) {
+          @for (referral of filteredReferrals(); track referral) {
+          <mat-option [value]="referral">
+            @if(isDCINephrologist(referral.value)) {
+            <span>DR. {{ referral.value.name }}</span>
+            } @else {
+            <span>{{ referral.value }}</span>
+            }
+          </mat-option>
+          }
+        } @else {
+          <p class="not-found">No nephrologists found matching search</p>
+        }
+      </mat-optgroup>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  @if(this.group.controls.unknownComment.enabled) {
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Comments</mat-label>
+    <textarea formControlName="unknownComment" matInput></textarea>
+  </mat-form-field>
+  }
+</form>

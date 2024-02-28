@@ -37,3 +37,15 @@ export interface ReferralGroup {
 export function isDCINephrologist(value: string | DCINephrologist): value is DCINephrologist {
   return typeof value === 'object' && 'name' in value && 'location' in value;
 }
+
+export function displayReferral(referral: Referral): string {
+  if (referral) {
+    if (isDCINephrologist(referral.value)) {
+      return `Dr. ${referral.value.name}`;
+    } else {
+      return referral.value;
+    }
+  } else {
+    return '';
+  }
+}
